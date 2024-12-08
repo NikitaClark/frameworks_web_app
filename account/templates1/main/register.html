@@ -1,0 +1,92 @@
+{% extends 'base.html' %}{% load static %}
+   {% block style %}
+<style>
+    .center{
+        display: block;
+        text-align: center;
+        color:#b5b5b5;
+        margin-top:2rem;
+    }
+    label{
+    color:#b5b5b5;
+        display: block;
+    text-align: center;
+    padding-top:.5rem;
+    padding-bottom:.5rem}
+     input{
+    display: block;
+    margin: auto;
+        padding: .5rem;
+    border-radius: 10px;}
+        .link{
+    color:#49949d;
+    }
+    .link:hover{color:#2f8089}
+form ul{
+text-align: center;
+    color: #e65a5a;
+    padding: 1rem;
+    }
+    form span{
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">{% endblock %}
+
+{% block content %}
+
+    {% if messages %}
+
+     {% endif %}
+     {% if message %}
+     <ul class="messages">
+        <li class="{{ message.tags }}">
+     {{ message }}
+     <a href="#" class="close"></a>
+    </ul>
+     {% endif %}
+<div class="features__sub-title sub-title">Create an account<br>
+Please, sign up using the following form:</div>
+
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+
+    
+    {% if messages %}
+    <ul class="messages">
+        {% for error in user_form.non_field_errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+
+    <!-- Затем выводим ошибки для каждого поля -->
+    {% for field in user_form %}
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+    </ul>
+
+    
+    <div>
+        <label for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}</label>
+        {{ user_form.username }}<br>
+
+        <label for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
+        {{ user_form.email }}<br>
+
+        <label for="{{ user_form.password.id_for_label }}">{{ user_form.password.label }}</label>
+        {{ user_form.password }}<br>
+
+        <label for="{{ user_form.password2.id_for_label }}">{{ user_form.password2.label }}</label>
+        {{ user_form.password2 }}<br>
+
+        <!-- Добавляем reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6LcGWTcqAAAAALnUfD1sNXjQesnYaRrWzMGUw2_E"></div>
+
+    </div>
+    <p><input type="submit" value="Сreate" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;"></p>
+</form>
+
+{% endblock %}

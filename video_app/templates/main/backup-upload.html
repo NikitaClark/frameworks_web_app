@@ -1,0 +1,354 @@
+{% extends 'main/layout_page.html' %}
+{% load static %}
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'main/css/upload.css' %}">
+
+<link rel="stylesheet" href="{% static 'main/css/homepage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/DashboardPage.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="loader"></div>
+<div class="wrapper">
+	<main class="page">
+		<section class="page__features features">
+            <div class="features__container" style="position: relative;z-index: 999;opacity: .8;">
+	            <div class="features__body">
+		            <div id="nostatusBlock" class="feature-item__icon" style="width: 110px;height: 110px;">
+						<img  loading="lazy" decoding="async" src="{% static 'main/img/icons/voices.svg' %}" alt="ai voices" style="min-width: 110px;">
+					</div>
+                        <div class="features__sub-title sub-title status" id="statusBlock" style="display:none;">
+                            <div class="container">
+                            <div class="border-line"></div>
+                            <div class="loaders">
+                            <div class="line line--1"></div>
+                            <div class="line line--2"></div>           
+                        </div>
+                </div>  
+                    <div class="support">
+                        <i class="fab fa-twitter-square"></i>
+                        <i class="fab fa-codepen"></i>
+                    </div>
+            </div>
+                <h2 class="features__title title">Uploading videos</h2>
+                    {% if messages %}
+                        <div class="messages" style="margin: auto;max-width: 300px;">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }}" style="list-style: none;text-align: center;padding: 1rem;"> 
+                                   <div class="alert alert-danger"> {{ message|safe }}</div>
+                                        <a href="#" class="close"></a>
+                                </li>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                        <div class="features__sub-title sub-title" id="video-upload-message">Add a video for voiceover translation.</div>
+                        <div class="features__sub-title sub-title" id="timer" style="display:none;"> Approximate time: <span id="time-display" ></span></div>
+                                <form action="https://wizzeframeworks.com/upload/" method="post" enctype="multipart/form-data" style="width: 100%;margin: auto;" id="myForm" >  
+                                    {% csrf_token %}  
+                                        <div class="forms">  
+                                            <div class="input__wrapper">  
+                                                <input name="file" type="file" id="file" class="input input__file" multiple>  
+                                                <label for="file" class="input__file-button">  
+                                                    <span class="input__file-icon-wrapper"><img class="input__file-icon" src="{% static  'main/img/add.svg' %}" alt="Select file" width="25"></span>  
+                                                    <span class="input__file-button-text">Select on PC</span>  
+                                                </label>  
+                                            </div> 
+                                            <div class="conf"> 
+                                            <div class="selectWrapper">  
+                                                <select name="language" id="language" class="selectNative js-selectNative" aria-labelledby="jobLabel">  
+                                                    <option value="sel" disabled="" selected="">Language...</option>  
+                                                    <option value="ru">Russian</option>  
+                                                    <option value="fr">French</option>  
+                                                    <option value="de">German</option>  
+                                                    <option value="en">English</option> 
+                                                </select>
+                                               <span class="labe">language output</span>
+                                      
+                                                <div class="selectCustom js-selectCustom" aria-hidden="true">  
+                                                    <div class="selectCustom-trigger">Language...</div>  
+                                                    <div class="selectCustom-options">  
+                                                        <div class="selectCustom-option" data-value="ru">Russian</div>  
+                                                        <div class="selectCustom-option" data-value="fr">French</div>  
+                                                        <div class="selectCustom-option" data-value="de">German</div>  
+                                                        <div class="selectCustom-option" data-value="en">English</div>  
+
+                                                    </div>  
+                                                </div>  
+                                            </div>  
+                                            <div class="selectWrapper">  
+                                                <select name="resolution" id="resolution" class="selectNative js-selectNativeResolution" aria-labelledby="resolutionLabel">  
+                                                    <option value="original" selected>Original</option>  
+                                                    <option value="240p">240p</option>  
+                                                    <option value="360p">360p</option>  
+                                                    <option value="720p">720p</option>  
+                                                    <option value="1080p">1080p</option>  
+                                                </select> 
+                                                <span class="labe">output resolution</span> 
+                                                
+                                                <div class="selectCustom js-selectCustomResolution" aria-hidden="true">  
+                                                    <div class="selectCustom-trigger">Original</div>  
+                                                    <div class="selectCustom-options">  
+                                                        <div class="selectCustom-option" data-value="original">Original</div>  
+                                                        <div class="selectCustom-option" data-value="240p">240p</div>  
+                                                        <div class="selectCustom-option" data-value="360p">360p</div>  
+                                                        <div class="selectCustom-option" data-value="720p">720p</div>  
+                                                        <div class="selectCustom-option" data-value="1080p">1080p</div>  
+                                                    </div>  
+                                                </div>  
+                                            </div>  
+                                            <div class="selectWrapper">  
+                                                <select name="quality" id="quality" class="selectNative js-selectNativeQuality" aria-labelledby="qualityLabel">  
+                                                    <option value="low">Low</option>  
+                                                    <option value="medium" selected>Medium</option>  
+                                                    <option value="high">High</option>  
+                                                </select>  
+                                                <span class="labe">output quality</span> 
+                                                <div class="selectCustom js-selectCustomQuality" aria-hidden="true">  
+                                                    <div class="selectCustom-trigger">Medium</div>  
+                                                    <div class="selectCustom-options">  
+                                                        <div class="selectCustom-option" data-value="low">Low</div>  
+                                                        <div class="selectCustom-option" data-value="medium">Medium</div>  
+                                                        <div class="selectCustom-option" data-value="high">High</div>  
+                                                    </div>  
+                                                </div>  
+                                            </div> 
+                                            </div> 
+                                        </div>  
+                                    <button type="submit" class="powered-video__btn btn btn--black" style="display:block;margin: 2rem auto 0rem;" id="load-data-button">Translate</button>  
+                                </form>  
+{% if download_link %}
+    <div class="features__sub-title sub-title">
+        The translation was completed successfully. <br>
+        <a href="{{ download_link }}" class="link">Download translated video</a>
+    </div>
+{% endif %}
+    </div>
+</div>
+<div class="powered-video__bg" style="width: 300vh;">
+    <picture>
+        <source media="(max-width: 750px)" srcset="{% static 'main/img/backgrounds/background-lights-mobile.png' %}">
+        <img width="288" height="260"  src="{% static 'main/img/backgrounds/background-lights.png' %}" alt="background colored lights">
+    </picture>
+</div>
+        </section>
+    </main>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script async src="{% static 'main/js/homepage.js' %}"></script>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('myForm').addEventListener('submit', function(event) {
+              // Показать статус-блок перед отправкой формы
+              document.getElementById('statusBlock').style.display = 'block';
+              document.getElementById('nostatusBlock').style.display = 'none';
+
+              // Вы можете закомментировать следующую строку для предотвращения отправки формы 
+              // event.preventDefault(); // Раскомментируйте это, если хотите отладить
+          });
+      });
+  </script>
+
+  <script>  
+// Форма-файл  
+let inputs = document.querySelectorAll('.input__file');  
+Array.prototype.forEach.call(inputs, function (input) {  
+    let label = input.nextElementSibling,  
+        labelVal = label.querySelector('.input__file-button-text').innerText;  
+
+    input.addEventListener('change', function (e) {  
+        let countFiles = '';  
+        if (this.files && this.files.length >= 1)  
+            countFiles = this.files.length;  
+
+        label.querySelector('.input__file-button-text').innerText = countFiles ? 'Selected files: ' + countFiles : labelVal;  
+    });  
+});  
+
+// Helper function to initialize custom selects  
+function initializeCustomSelect(selectNative, selectCustom) {  
+    const elSelectBox = selectCustom.querySelector('.selectCustom-trigger');  
+    const elSelectOpts = selectCustom.querySelector('.selectCustom-options');  
+    const customOptsList = Array.from(elSelectOpts.children);  
+    const optionsCount = customOptsList.length;  
+    let optionChecked = "";  
+    let optionHoveredIndex = -1;  
+
+    // Открытие/закрытие кастомного селекта по клику  
+    elSelectBox.addEventListener("click", (e) => {  
+        const isClosed = !selectCustom.classList.contains("isActive");  
+        isClosed ? openSelectCustom() : closeSelectCustom();  
+    });  
+
+    function openSelectCustom() {  
+        selectCustom.classList.add("isActive");  
+        selectCustom.setAttribute("aria-hidden", false);  
+        if (optionChecked) {  
+            const optionCheckedIndex = customOptsList.findIndex(  
+                (el) => el.getAttribute("data-value") === optionChecked  
+            );  
+            updateCustomSelectHovered(optionCheckedIndex);  
+        }  
+        document.addEventListener("click", watchClickOutside);  
+        document.addEventListener("keydown", supportKeyboardNavigation);  
+    }  
+
+    function closeSelectCustom() {  
+        selectCustom.classList.remove("isActive");  
+        selectCustom.setAttribute("aria-hidden", true);  
+        updateCustomSelectHovered(-1);  
+        document.removeEventListener("click", watchClickOutside);  
+        document.removeEventListener("keydown", supportKeyboardNavigation);  
+    }  
+
+    function updateCustomSelectHovered(newIndex) {  
+        const prevOption = elSelectOpts.children[optionHoveredIndex];  
+        const option = elSelectOpts.children[newIndex];  
+
+        if (prevOption) {  
+            prevOption.classList.remove("isHover");  
+        }  
+        if (option) {  
+            option.classList.add("isHover");  
+        }  
+        optionHoveredIndex = newIndex;  
+    }  
+
+    function updateCustomSelectChecked(value, text) {  
+        const prevValue = optionChecked;  
+        const elPrevOption = elSelectOpts.querySelector(`[data-value="${prevValue}"]`);  
+        const elOption = elSelectOpts.querySelector(`[data-value="${value}"]`);  
+
+        if (elPrevOption) {  
+            elPrevOption.classList.remove("isActive");  
+        }  
+        if (elOption) {  
+            elOption.classList.add("isActive");  
+        }  
+
+        elSelectBox.textContent = text;  
+        optionChecked = value;  
+    }  
+
+    function watchClickOutside(event) {  
+        if (!selectCustom.contains(event.target)) {  
+            closeSelectCustom();  
+        }  
+    }  
+
+    function supportKeyboardNavigation(event) {  
+        if (event.keyCode === 40 && optionHoveredIndex < optionsCount - 1) {  
+            event.preventDefault();  
+            updateCustomSelectHovered(optionHoveredIndex + 1);  
+        }  
+        if (event.keyCode === 38 && optionHoveredIndex > 0) {  
+            event.preventDefault();  
+            updateCustomSelectHovered(optionHoveredIndex - 1);  
+        }  
+        if (event.keyCode === 13 || event.keyCode === 32) {  
+            event.preventDefault();  
+            const option = elSelectOpts.children[optionHoveredIndex];  
+            const value = option ? option.getAttribute("data-value") : null;  
+
+            if (value) {  
+                selectNative.value = value;  
+                updateCustomSelectChecked(value, option.textContent);  
+            }  
+            closeSelectCustom();  
+        }  
+        if (event.keyCode === 27) {  
+            closeSelectCustom();  
+        }  
+    }  
+
+    // Синхронизация изменения в родном селекте  
+    selectNative.addEventListener("change", (e) => {  
+        const value = e.target.value;  
+        const elRespectiveCustomOption = elSelectOpts.querySelector(`[data-value="${value}"]`);  
+        updateCustomSelectChecked(value, elRespectiveCustomOption.textContent);  
+    });  
+
+    // Обработка выбора опции  
+    customOptsList.forEach((elOption, index) => {  
+        elOption.addEventListener("click", (e) => {  
+            const value = e.target.getAttribute("data-value");  
+            selectNative.value = value;  
+            updateCustomSelectChecked(value, e.target.textContent);  
+            closeSelectCustom();  
+        });  
+
+        elOption.addEventListener("mouseenter", () => {  
+            updateCustomSelectHovered(index);  
+        });  
+    });  
+}  
+
+// Инициализация кастомных селектов  
+const elSelectNativeLanguage = document.getElementsByClassName("js-selectNative")[0];  
+const elSelectCustomLanguage = document.getElementsByClassName("js-selectCustom")[0];  
+initializeCustomSelect(elSelectNativeLanguage, elSelectCustomLanguage);  
+
+const elSelectNativeResolution = document.getElementsByClassName("js-selectNativeResolution")[0];  
+const elSelectCustomResolution = document.getElementsByClassName("js-selectCustomResolution")[0];  
+initializeCustomSelect(elSelectNativeResolution, elSelectCustomResolution);  
+
+const elSelectNativeQuality = document.getElementsByClassName("js-selectNativeQuality")[0];  
+const elSelectCustomQuality = document.getElementsByClassName("js-selectCustomQuality")[0];  
+initializeCustomSelect(elSelectNativeQuality, elSelectCustomQuality); 
+
+
+
+</script>  
+<script>
+    document.getElementById('load-data-button').addEventListener('click', function(event) {
+        // Скрываем блок с сообщением о загрузке видео
+        const uploadMessage = document.getElementById('video-upload-message');
+        uploadMessage.style.display = 'none';
+    
+        // Отображаем блок с таймером
+        const timerDiv = document.getElementById('timer');
+        timerDiv.style.display = 'block';
+    
+        // Устанавливаем начальное время
+        let timeRemaining = 70; // 
+        const timeDisplay = document.getElementById('time-display');
+    
+        // Обновляем отображение времени
+        const updateTimer = () => {
+            if (timeRemaining >= 0) {
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timeRemaining -= 1;
+            } else {
+                clearInterval(timerInterval);
+                timeDisplay.textContent = 'Sorry, it will take a little longer. We are still working on translating your video';
+            }
+        };
+    
+        // Запускаем таймер
+        updateTimer(); // Обновляем сразу же
+        const timerInterval = setInterval(updateTimer, 1000); // Обновляем каждую секунду
+    });
+    </script>
+    <script>
+        // Проверяем наличие сообщения об ошибке о недостатке токенов
+        const messages = document.querySelectorAll('.alert.alert-danger');
+    
+        messages.forEach(function(msg) {
+            if (msg.textContent.includes('not enough tokens')) {
+                setTimeout(() => {
+                    // Перенаправляем на страницу активации
+                    window.location.href = 'account/activacions/';
+                }, 5000); // 5000 миллисекунд = 5 секунд
+            }
+        });
+    </script>
+{% endblock %}

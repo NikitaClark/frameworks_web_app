@@ -1,0 +1,46 @@
+
+{% extends 'new.html' %}{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'main/css/homepage-t.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/DashboardPage.css' %}">
+    <div>
+        <main>
+            <section class="generate-section">
+                <a href="{% url 'upload_form' %}"><button class="generate-main-btn">Generate Video</button></a>
+                <p>1 Credit for 1 minute</p>
+            </section>
+            <section class="videos-section">          
+                <h2>Your Previously Generated Videos</h2>
+                
+                <div class="videos-grid">
+                  {% for video_link in page_obj %}
+                    <div class="video-card">
+                      
+                        <div class="video-thumbnail-container">
+                            {% if video_link.thumbnail_path %}
+                                <img src="{{ video_link.thumbnail_path }}" alt="Thumbnail for {{ video_link.filename }}" class="video-thumbnail"/>
+                            {% else %}
+                                <p>No thumbnail available</p>
+                            {% endif %}
+                            <div class="overlay-buttons">
+                                <button class="download-btn">
+                                    <a href="{{ video_link.link }}"><img src="{% static 'main/img/public/Download.png' %}" alt="Download button" /></a>
+                                </button>
+                                <button class="delete-btn">
+                                    <a href="{% url 'delete_video' video_link.id %}"><img src="{% static 'main/img/public/delete.png' %}" alt="Delete button" /></a>
+                                </button>
+                            </div>
+                        </div>
+                       
+                        <h3>{{ video_link.filename }}</h3>
+                        <p>Generate an image showing an advanced AI robot holding a digital canvas, painting a masterpiece in vibrant colors...</p>
+                    </div>
+                    {% endfor %}
+                </div>
+              
+            </section>
+        </main>
+
+          </div>
+        {% endblock %}

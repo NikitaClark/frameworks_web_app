@@ -1,0 +1,106 @@
+
+.link{color:#49949d;}
+.link:hover{color:#2f8089}
+.container {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e67572;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    position: relative; /* Для абсолютного позиционирования */
+}
+
+.loaders {
+    height: 50%;
+    width: 50%;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.loaders .line {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border-top: 5px solid #fff;
+
+}
+
+.loaders .line--1 {
+    transform: rotateY(60deg) rotateX(30deg);
+    animation: spin--1 800ms linear infinite;
+}
+
+.loaders .line--2 {
+    transform: rotateY(60deg) rotateX(-30deg);
+    animation: spin--2 800ms linear infinite;
+    animation-delay: 400ms;
+}
+
+@keyframes spin--1 {
+    to {
+        transform: rotateY(60deg) rotateX(30deg) rotate(360deg);
+    }
+}
+
+@keyframes spin--2 {
+    to {
+        transform: rotateY(60deg) rotateX(-30deg) rotate(360deg);
+    }
+}
+.border-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    overflow: hidden; /* Убираем лишние части */
+}
+
+.border-line::before,
+.border-line::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid transparent; /* Прозрачный цвет для базовой линии */
+}
+
+.border-line::before {
+    right:0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    border-top-color: #fff; /* Цвет верхней части */
+    animation: move-border 2s linear infinite; /* Анимация движения */
+}
+
+.border-line::after {
+    right:0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    border: 5px solid transparent; /* Прозрачный цвет для базовой линии */
+    border-left-color: #fff; /* Цвет левой части, можно выбрать любой другой цвет */
+    transform: rotate(90deg); /* Начальное положение */
+    animation: move-border 2s linear infinite; /* Анимация движения */
+}
+
+@keyframes move-border {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.support {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px;
+    display: flex;
+}

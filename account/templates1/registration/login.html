@@ -1,0 +1,49 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2 class="features__title title" style="line-height: 125%;">Log in</h2>
+    {% if form.errors %}
+{% endif %}
+<div class="login-form">
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="messages">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+    <div>
+        <label for="{{ form.username.id_for_label }}">Username or Email</label>
+            {{ form.username }}<br>
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            {{ form.password }}<br>
+    </div>    
+    <input type="hidden" name="next" value="{{ next }}"/>
+        <p><input type="submit" value="Log-in" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;"></p>
+</form>
+    <a href="{% url 'password_reset' %}" class="center link"> Forgotten your password?</a>
+    <a href="{% url 'register' %}" class="center link">Create an account</a>
+</div>
+
+<div class="social">
+    <a href="{% url 'social:begin' 'google-oauth2' %}">
+    <li class="google">
+        <img width="32" height="32"   src="{% static 'main/img/icons/google.png' %}">
+        <span>Sign in with google</span>
+    </li>
+    </a>
+    <a href="{% url 'social:begin' 'vk-oauth2' %}">
+    <li class="Vkontakte">  
+            <img width="32" height="32"   src="{% static 'main/img/icons/vk.png' %}">
+            <span>Sign in with VK</span>
+    </li>
+    </a> 
+</div>
+
+{% endblock %}

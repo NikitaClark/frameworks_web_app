@@ -1,0 +1,73 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/css/activacions.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2 class="features__title title" style="font-size:3rem;">Subscription</h2>
+<div class="form-group">
+    <div class="form-container">
+        <div class="features__sub-title sub-title">Basic</div>
+        <div class="sub-title" style="color:#cfc09f; font-size: 4rem;">10$</div>
+        <label>You will receive 50 tokens</label>
+        <a href="{% url 'activate_basic' %}" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;">Activate</a>
+    </div>
+
+    <div class="form-container">
+        <div class="features__sub-title sub-title">Premium</div>
+        <div class="sub-title" style="color:#cfc09f; font-size: 4rem;">20$</div>
+        <label>You will receive 100 tokens</label>
+        <a href="{% url 'activate_premium' %}" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;">Activate</a>
+    </div>
+
+    <div class="form-container">
+        <div class="features__sub-title sub-title">Enterprises</div>
+        <div class="sub-title gold" style="color:#cfc09f; font-size: 4rem;">30$</div>
+        <label>You will receive 150 tokens</label>
+        <a href="{% url 'activate_enterprises' %}" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;">Activate</a>
+    </div>
+
+</div>
+
+<!-- Форма для ввода промокода, теперь она под блоком с планами подписок -->
+<label>Enter Coupon Code:1111</label>
+<form action="{% url 'activate_basic' %}" method="post" style="display:flex;">
+    {% csrf_token %}
+    <input type="text" name="coupon" placeholder="Enter promo code" />
+    <button type="submit" class="btn">Go</button>
+</form>
+
+{% endblock %}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+    function createCheckoutSession(plan) {
+        fetch(`/activate/${plan}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.url) {
+                window.location.href = data.url;  
+            } else {
+                console.error('Ошибка:', data.error);
+            }
+        })
+        .catch(error => console.error('Ошибка:', error));
+    }
+
+    document.getElementById('basic-btn').addEventListener('click', () => createCheckoutSession('basic'));
+    document.getElementById('premium-btn').addEventListener('click', () => createCheckoutSession('premium'));
+    document.getElementById('enterprises-btn').addEventListener('click', () => createCheckoutSession('enterprises'));
+</script>
+
+<button id="basic-btn" class="btn">Activate Basic</button>
+<button id="premium-btn" class="btn">Activate Premium</button>
+<button id="enterprises-btn" class="btn">Activate Enterprises</button>

@@ -1,0 +1,26 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block style %}	<link rel="stylesheet" href="{% static 'main/css/contact.min.css' %}">{% endblock %}
+{% block content %}
+	<div class="wrapper">
+
+		<main class="page">
+			Contact
+		</main>
+	</div>
+
+	<!-- <div id="popup" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">Close</button>
+			<div class="popup__text">
+				Text
+			</div>
+		</div>
+	</div>
+</div> -->
+
+
+{% endblock %}
+
+{% block script %}<script async src="{% static 'main/js/contact.min.js' %}"></script>{% endblock %}

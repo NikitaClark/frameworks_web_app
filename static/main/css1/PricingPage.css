@@ -1,0 +1,231 @@
+.pricing-page html, .pricing-page body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+}
+
+.pricing-page header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-page .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.pricing-page .left-section,
+.pricing-page .middle-section,
+.pricing-page .right-section {
+    display: flex;
+    align-items: center;
+}
+
+.pricing-page .icon, .pricing-page .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.pricing-page main {
+    margin-top: 20px;
+    text-align: center;
+    min-height: calc(100vh - 200px);
+    margin-bottom: 60px;
+}
+
+.pricing-page h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.pricing-page .pricing-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.pricing-page .pricing-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    width: 270px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.pricing-page .pricing-card.selected {
+    border: 2px solid #007BFF;
+    background-color: #f0faff;
+}
+
+.pricing-page .pricing-card.red-border {
+    border: 2px solid #FF3B3B;
+    background-color: #fff0f0;
+}
+
+.pricing-page .pricing-card h2 {
+    font-size: 3.5rem;
+    margin: 10px 0;
+}
+
+.pricing-page .pricing-card p {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #666;
+}
+
+.pricing-page .pricing-card button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px 0;
+}
+
+.pricing-page .pricing-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.pricing-page .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-page .promo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    width: 60%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-page .promo-label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pricing-page .promo-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.pricing-page .promo-input {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    width: 75%;
+    font-size: 1rem;
+    color: #777;
+}
+
+.pricing-page .promo-input::placeholder {
+    color: #ccc;
+}
+
+.pricing-page .promo-button {
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.pricing-page .promo-button:hover {
+    background-color: #ccc;
+}
+
+.pricing-page footer {
+    position: absolute;
+    bottom: 20;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    font-size: 0.75rem;
+    color: #666;
+    text-align: center;
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.pricing-page footer a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.pricing-page footer a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .pricing-page .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .pricing-page .left-section, .pricing-page .right-section {
+        margin-bottom: 10px;
+    }
+
+    .pricing-page .pricing-container {
+        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .pricing-page .pricing-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .pricing-page .promo-container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .pricing-page .promo-container,
+    .pricing-page .pricing-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .pricing-page .promo-input,
+    .pricing-page .promo-button {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="objectBoundingBox" x1="0.5" y1="0" x2="0.5" y2="1" id="gradient_1">
+      <stop offset="0%" stop-color="#07FFFF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+  <g id="Group-12">
+    <path d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64Z" id="Oval-Copy-3" fill="url(#gradient_1)" fill-rule="evenodd" stroke="none" />
+    <g id="Group" transform="translate(20 20)">
+      <path d="M0 0L24 0L24 24L0 24L0 0Z" id="Path" fill="none" fill-rule="evenodd" stroke="none" />
+      <path d="M5 15L5 17C5 18.0544 5.81588 18.9182 6.85074 18.9945L7 19L10 19L10 21L7 21C4.79086 21 3 19.2091 3 17L3 15L5 15ZM18 10L22.4 21L20.245 21L19.044 18L14.954 18L13.755 21L11.601 21L16 10L18 10ZM17 12.8852L15.753 16L18.245 16L17 12.8852ZM8 2L8 4L12 4L12 11L8 11L8 14L6 14L6 11L2 11L2 4L6 4L6 2L8 2ZM17 3C19.2091 3 21 4.79086 21 7L21 9L19 9L19 7C19 5.89543 18.1046 5 17 5L14 5L14 3L17 3ZM6 6L4 6L4 9L6 9L6 6ZM10 6L8 6L8 9L10 9L10 6Z" id="Shape" fill="#000000" stroke="none" />
+    </g>
+  </g>
+</svg>

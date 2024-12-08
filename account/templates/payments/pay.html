@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата</title>
+</head>
+<body>
+
+    <h1>Оплатите 10 долларов</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="50">
+        <button type="submit">Pay $50</button>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="100">
+        <button type="submit">Pay $100</button>
+    </form>
+    <form  method="post">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="150">
+        <button type="submit">Pay $150</button>
+    </form>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</body>
+<script>
+    document.querySelectorAll('.pay-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const amount = this.getAttribute('data-amount');
+            console.log('Selected amount:', amount); // Для отладки
+
+            // Отправка выбранной суммы на сервер через AJAX
+            fetch('/account/create-payment/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: amount }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server response:', data);
+                // Здесь можно обработать ответ от сервера
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+</html>

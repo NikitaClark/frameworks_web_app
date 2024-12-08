@@ -1,0 +1,70 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/css/EditProfilePage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="features__title title" style="font-size:3rem;margin-top:3rem;">Dashboard</h2>
+    {% if profile %}
+        <div class="block_token" onmouseover="showTooltip()" onmouseout="hideTooltip()">
+            <div>
+                <img src="{% static 'main/img/icons/token.png' %}" class="token1">
+                <img src="{% static 'main/img/icons/token.png' %}" class="token2">
+                <img src="{% static 'main/img/icons/token.png' %}" class="token3">
+            </div>
+                <span class="back_ttok"><span class="ttok">{{ profile.tokens }}</span></span>
+                <div class="tooltip" id="tokenTooltip" style="display:none;">1 token = 1 minute of video processing</div>
+        </div>
+        {% else %}
+            <p>Profile not found</p>
+        {% endif %}
+
+
+
+
+
+
+        <div class="features__section-point section-point">
+            {% if is_premium_member %}
+                <span class="pulse"></span> <span>Premium</span>
+                    {% elif is_basic_member %}
+                        <span class="pulse"></span><span>Basic</span>
+                    {% elif is_enterprises_member %}
+                        <span class="pulse"></span><span>Enterprises</span>
+                    {% else %}
+                        Free
+            {% endif %}
+        </div>
+    {% if is_basic_member %}
+        <p id="countdown" >
+            <span  style="opacity: .9;"></span>
+        </p>
+    {% else %} {% endif %}
+
+{% if user.profile.photo %}
+    <img src="{{ user.profile.photo.url }}" alt="Profile Picture" style="width:110px;height:110px;border-radius: 50%;    object-fit: cover;">
+        {% else %}
+            <img src="{% static 'main/img/icons/user.png' %}" style="background: #c1c1c1;padding: 3px;width:75px;display:block;margin:auto; border-radius: 50%; height:auto;" alt="Default User Icon">
+{% endif %}
+
+<div class="menu-dash ">
+    <a href="{% url 'edit' %}" class="features__section-point section-point"> Edit profile</a>
+    <a href="{% url 'password_change' %}" class="features__section-point section-point">Cange password</a>
+</div> 
+    <a href="{% url 'upload_form' %}" class="powered-video__btn btn btn--black lkhov" style="display:block;margin: 2rem auto 0rem;">Start</a>
+        <div class="menu-dash-prem "> 
+            <a href="{% url 'activacions' %}"  id="activate-premium"><img style= "filter: saturate(0.5);    margin-right: .4rem;"width="30" height="30"src="{% static 'main/img/icons/ap.png' %}"><span>Activate Subscription</span></a>
+        </div>
+
+{% if user.groups.all %}
+    <form action="{% url 'deactivate_premium' %}" method="post">
+        {% csrf_token %}
+        <!--<button type="submit" style="color:#b7b7b7">Deactivate subscription</button>-->
+   </form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}{% load static %}
+{% load widget_tweaks %}
+   {% block style %}
+<style>
+    .center{
+        display: block;
+        text-align: center;
+        color:#b5b5b5;
+        margin-top:2rem;
+    }
+    label{
+    color:#b5b5b5;
+        display: block;
+    text-align: center;
+    padding-top:.5rem;
+    padding-bottom:.5rem}
+     input{
+    display: block;
+    margin: auto;
+        padding: .5rem;
+    border-radius: 10px;}
+        .link{
+    color:#49949d;
+    }
+    .link:hover{color:#2f8089}
+form ul{
+text-align: center;
+    color: #e65a5a;
+    padding: 1rem;
+    }
+    form span{
+        display: none;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/homepage.css' %}">{% endblock %}
+
+{% block content %}
+
+
+
+<div class="features__sub-title sub-title">Create an account</div>
+
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+
+    <!-- {% if user_form.errors %}
+    <ul class="errorlist">
+        {% for field, errors in user_form.errors.items %}
+            <li>
+                <strong>{{ field }}:</strong>
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %} -->
+
+
+    
+    {% if messages %}
+    <ul class="messages">
+        {% for error in user_form.non_field_errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+
+    <!-- Затем выводим ошибки для каждого поля -->
+    {% for field in user_form %}
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+    </ul>
+
+    
+    <div style="display: flex;flex-direction: column;gap: 10px;">
+        {% for field in user_form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field | add_class:"login_form_input" }}
+            {% if field.errors %}
+                <ul class="errorlist">
+                    {% for error in field.errors %}
+                        <li class="input_error">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endfor %}
+        <!-- <label for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}</label>
+        {{ user_form.username|add_class:"login_form_input" }}<br>
+
+        <label for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
+        {{ user_form.email|add_class:"login_form_input" }}<br>
+
+        <label for="{{ user_form.password.id_for_label }}">{{ user_form.password.label }}</label>
+        {{ user_form.password|add_class:"login_form_input" }}<br>
+
+        <label for="{{ user_form.password2.id_for_label }}">{{ user_form.password2.label }}</label>
+        {{ user_form.password2|add_class:"login_form_input" }}<br> -->
+
+        <!-- Добавляем reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6Le--pEqAAAAAGqMBhuHwwUiK2xj0d6OOPaD8pLq"></div>
+
+    </div>
+    <p><input type="submit" value="Сreate" class="powered-video__btn btn btn--black lkhov" style="display:block;"></p>
+</form>
+
+{% endblock %}

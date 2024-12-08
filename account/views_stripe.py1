@@ -1,0 +1,63 @@
+import stripe
+from django.http import JsonResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from account.views import activate_basic, activate_premium, activate_enterprises  # Import activation functions
+
+# Set your Stripe public and secret keys
+STRIPE_PUBLIC_KEY = 'pk_test_51PxpibB5X9rhrVyY15tEOGLjWELUJSPfjfqx9RhnSD43PmkgluxQqRDCXWnhNXuYjFd3eAyiE5s37fo2gmOWlshi00bdoXj5Qr'
+STRIPE_SECRET_KEY = 'sk_test_51PxpibB5X9rhrVyYNnWfmIepD9Coheq2MznsxtE6avkS3B05XbriTEjiPC8tLdFWOdQKhBGLnE93NOFHrip4J5ZX003ci0kCUp'
+
+# Set your Stripe secret key for API use
+stripe.api_key = STRIPE_SECRET_KEY
+
+# Subscription plans and their prices in cents
+SUBSCRIPTION_PLANS = {
+    'basic': 1000,  # $10.00
+    'premium': 2000,  # $20.00
+    'enterprises': 3000,  # $30.00
+}
+
+@csrf_exempt
+def create_checkout_session(request, plan):
+    domain_url = 'https://wizzeframeworks.com/'  # Local domain
+    coupon_id = request.POST.get('coupon')  # Get the coupon code entered by the user
+    
+    try:
+        # Create Stripe Checkout session for the selected plan
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': f'{plan.capitalize()} Subscription',
+                    },
+                    'unit_amount': SUBSCRIPTION_PLANS[plan],
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            discounts=[{'coupon': coupon_id}] if coupon_id else [],  # Apply coupon if provided
+            success_url=domain_url + f'account/success/?plan={plan}',  # Add plan parameter
+            cancel_url=domain_url + 'account/cancel/',
+        )
+        # Redirect the user to the Stripe checkout page
+        return HttpResponseRedirect(checkout_session.url)
+    except Exception as e:
+        return JsonResponse({'error': str(e)})
+
+def success(request):
+    plan = request.GET.get('plan')  # Get the plan from the query parameters
+    
+    if plan == 'basic':
+        return activate_basic(request)  # Activate basic subscription
+    elif plan == 'premium':
+        return activate_premium(request)  # Activate premium subscription
+    elif plan == 'enterprises':
+        return activate_enterprises(request)  # Activate enterprises subscription
+    
+    return JsonResponse({'message': 'Payment successful, but plan not recognized!'})
+
+def cancel(request):
+    return JsonResponse({'message': 'Payment cancelled.'})

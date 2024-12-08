@@ -1,0 +1,17 @@
+[0;1;32m●[0m uwsgi.service - LSB: Start/stop uWSGI server instance(s)
+     Loaded: loaded (]8;;file://ubuntu-s-2vcpu-4gb-amd-fra1-01/etc/init.d/uwsgi/etc/init.d/uwsgi]8;;; generated[0;1;32m[0m)
+     Active: [0;1;32mactive (running)[0m since Thu 2024-09-05 12:47:17 UTC; 55s ago
+       Docs: ]8;;man:systemd-sysv-generator(8)man:systemd-sysv-generator(8)]8;;
+    Process: 2251 ExecStart=/etc/init.d/uwsgi start (code=exited, status=0/SUCCESS)
+      Tasks: 3 (limit: 4657)
+     Memory: 163.9M (peak: 171.3M)
+        CPU: 24.639s
+     CGroup: /system.slice/uwsgi.service
+             ├─[0;38;5;245m2358 /usr/bin/uwsgi --ini /usr/share/uwsgi/conf/default.ini --ini /etc/uwsgi/apps-enabled/wizzeframeworks.ini --daemonize /var/log/uwsgi/app/wizzeframeworks.log[0m
+             ├─[0;38;5;245m2365 /usr/bin/uwsgi --ini /usr/share/uwsgi/conf/default.ini --ini /etc/uwsgi/apps-enabled/wizzeframeworks.ini --daemonize /var/log/uwsgi/app/wizzeframeworks.log[0m
+             └─[0;38;5;245m2366 /usr/bin/uwsgi --ini /usr/share/uwsgi/conf/default.ini --ini /etc/uwsgi/apps-enabled/wizzeframeworks.ini --daemonize /var/log/uwsgi/app/wizzeframeworks.log[0m
+
+Sep 05 12:47:16 ubuntu-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Starting uwsgi.service - LSB: Start/stop uWSGI server instance(s)...
+Sep 05 12:47:16 ubuntu-s-2vcpu-4gb-amd-fra1-01 uwsgi[2251]:  * Starting app server(s) uwsgi
+Sep 05 12:47:17 ubuntu-s-2vcpu-4gb-amd-fra1-01 uwsgi[2251]:    ...done.
+Sep 05 12:47:17 ubuntu-s-2vcpu-4gb-amd-fra1-01 systemd[1]: Started uwsgi.service - LSB: Start/stop uWSGI server instance(s).

@@ -1,0 +1,29 @@
+{% extends 'new.html' %}{% load static %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'main/css/homepage-t.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/DashboardPage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/PricingPage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+<body>
+    <div style="
+    min-width: 330px;
+    margin: 5rem auto;
+    text-align: center;
+    border: 1px solid #eee;
+    height: 400px;
+        ">
+    <div style="
+    background: #87bfb0;
+    padding: 1rem;
+    ">
+        <h1>Success Payment</h1>
+    </div>   
+    
+    <p style="text-align: left;    padding: 15px;">Your Invoice: {{ invoice }}</p>
+    <p style="text-align: left;    padding: 15px;">Payment Amount: {{ amount_param }} $</p>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}

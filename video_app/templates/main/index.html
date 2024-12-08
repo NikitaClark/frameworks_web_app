@@ -1,0 +1,281 @@
+
+{% extends 'main/layout.html' %}{% load static %}
+{% block style %}	<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">{% endblock %}
+{% block content  %}
+<div class="loader"></div>
+		<main class="page">
+			<section class="page__powered-video powered-video">
+				<div class="powered-video__container">
+					<div class="powered-video__section-point section-point">Wizze Frameworks</div>
+					<h1 class="powered-video__title main-title">AI-powered video</h1>
+					<div class="powered-video__sub-title sub-title">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+					
+					
+	
+
+
+				   {% if request.user.is_authenticated %}
+					<a href="{% url 'upload_form' %}" class="powered-video__btn btn btn--black">Get Started</a>
+				   {% else %}
+				   <a href="{% url 'register' %}" class="powered-video__btn btn btn--black">Get Started for Free</a>
+				   {% endif %}
+
+					<div class="powered-video__video-bg powered-video-bg">
+						<div class="powered-video-bg__info-point powered-video-bg__info-point--created">1,042 videos are created</div>
+						<div class="powered-video-bg__videos">
+							<div class="powered-video-bg__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/01.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/01.mp4' %}" type="video/mp4">
+									<p>Your browser does not support the video tag, but you can <a href=“./files/01.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="powered-video-bg__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/02.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/02.mp4' %}" type="video/mp4">
+									<p>Your browser does not support the video tag, but you can <a href=“./files/02.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="powered-video-bg__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/03.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/03.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/03.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="powered-video-bg__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/04.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/04.mp4' %}" type="video/mp4">
+									<p>Your browser does not support the video tag, but you can <a href=“./files/04.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="powered-video-bg__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/05.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/05.mp4' %}" type="video/mp4">
+									<p>Your browser does not support the video tag, but you can <a href=“./files/05.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+						</div>
+						<div class="powered-video-bg__info-point powered-video-bg__info-point--examples">Examples of created videos</div>
+					</div>
+				</div>
+				<div class="powered-video__bg">
+					<picture>
+						<source media="(max-width: 750px)" srcset="{% static 'main/img/backgrounds/background-lights-mobile.png' %}">
+						<img width="288" height="260" fetchpriority="high" loading="eager" decoding="async" src="{% static 'main/img/backgrounds/background-lights.png' %}" alt="background colored lights">
+					</picture>
+				</div>
+			</section>
+			<section class="page__use-cases use-cases" id="use_cases">
+				<div class="use-cases__container">
+					<div class="use-cases__section-point section-point">Use Cases</div>
+					<h2 class="use-cases__title title">Wide range of possibilities</h2>
+					<div class="use-cases__sub-title sub-title">Our AI can cover your needs. Just look at the areas we can cover.</div>
+					<div class="use-cases__points use-cases-points">
+						<div class="use-cases-points__body">
+							<div class="use-cases-points__row-double">
+								<div class="use-cases-points__row">
+									<div class="use-cases-points__point btn">Learning</div>
+									<div class="use-cases-points__point btn">Sales Enablement</div>
+								</div>
+								<div class="use-cases-points__row">
+									<div class="use-cases-points__point btn">Information Security</div>
+									<div class="use-cases-points__point btn">Marketing</div>
+								</div>
+							</div>
+							<div class="use-cases-points__row-double">
+								<div class="use-cases-points__row">
+									<div class="use-cases-points__point btn">Learning & Development</div>
+									<div class="use-cases-points__point btn">Sales Enablement</div>
+								</div>
+								<div class="use-cases-points__row">
+									<div class="use-cases-points__point btn">Development</div>
+									<div class="use-cases-points__point btn">Customer Service</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="page__features features" id="features">
+				<div class="features__container">
+					<div class="features__body">
+						<div class="features__section-point section-point" >Features</div>
+						<h2 class="features__title title">Superior AI Video Capabilities</h2>
+						<div class="features__sub-title sub-title">Our AI can cover your needs. Just look at the areas we can cover.</div>
+						<ul class="features__items">
+							<li class="features__item feature-item">
+								<div class="feature-item__icon">
+									<img width="64" height="64" loading="lazy" decoding="async" src="{% static 'main/img/icons/avatars.svg' %}" alt="ai avatars">
+								</div>
+								<h3 class="feature-item__title title-small">AI avatars</h3>
+								<div class="feature-item__text text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+							<li class="features__item feature-item">
+								<div class="feature-item__icon">
+									<img width="64" height="64" loading="lazy" decoding="async" src="{% static 'main/img/icons/voices.svg' %}" alt="ai voices">
+								</div>
+								<h3 class="feature-item__title title-small">AI Voices</h3>
+								<div class="feature-item__text text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+							<li class="features__item feature-item">
+								<div class="feature-item__icon">
+									<img width="64" height="64" loading="lazy" decoding="async" src="{% static 'main/img/icons/translate.svg' %}" alt="video translate">
+								</div>
+								<h3 class="feature-item__title title-small">Video Translate</h3>
+								<div class="feature-item__text text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="page__faq faq" id="faq">
+				<div class="faq__container">
+					<div class="faq__section-point section-point">FAQ</div>
+					<h2 class="faq__title title">Top Questions, Detailed Answers</h2>
+					<div class="faq__sub-title sub-title">Find answers to the most common questions about our AI video creation tool, all in one place.</div>
+					<div class="faq__spoller-text spoller-text">
+						<ul data-spollers class="spoller-text__wrapper">
+							<li class="spoller-text__item">
+								<button type="button" data-spoller class="spoller-text__title title-small">Is Frameworks a Free AI Video Generator?</button>
+								<div class="spoller-text__body text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+							<li class="spoller-text__item">
+								<button type="button" data-spoller class="spoller-text__title title-small">Can I customize AI-generated videos to add brand identity?</button>
+								<div class="spoller-text__body text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck. It’s as easy as making a slide deck.</div>
+							</li>
+							<li class="spoller-text__item">
+								<button type="button" data-spoller class="spoller-text__title title-small">Is Frameworks a Free AI Video Generator?</button>
+								<div class="spoller-text__body text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck. Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+							<li class="spoller-text__item">
+								<button type="button" data-spoller class="spoller-text__title title-small">Can I customize AI-generated videos to add brand identity?</button>
+								<div class="spoller-text__body text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck. Create studio-quality videos with AI avatars and voiceovers in 130+ languages.</div>
+							</li>
+							<li class="spoller-text__item">
+								<button type="button" data-spoller class="spoller-text__title title-small">Is Frameworks a Free AI Video Generator?</button>
+								<div class="spoller-text__body text-small-second">Create studio-quality videos with AI avatars and voiceovers in 130+ languages. It’s as easy as making a slide deck.</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="page__join-now join-now">
+				<div class="join-now__container">
+					<div class="join-now__body">
+						<div class="join-now__content">
+							<div class="join-now__sub-title sub-title">Join now</div>
+							<div class="join-now__title title-second">For Exclusive AI Video Features</div>
+							
+							{% if request.user.is_authenticated %}
+							<a href="{% url 'upload_form' %}" class="join-now__btn btn btn--black">Get Started</a>
+						   {% else %}
+						   <a href="{% url 'register' %}" class="join-now__btn btn btn--black">Get Started for Free</a>
+						   {% endif %}
+
+
+						</div>
+						<div class="join-now__bg">
+							<picture>
+								<source media="(max-width: 750px)" srcset="{% static 'main/img/backgrounds/background-lights-join-now-mobile.png' %}">
+								<img width="288" height="260" fetchpriority="high" loading="eager" decoding="async" src="{% static 'main/img/backgrounds/background-lights-join-now.png' %}" alt="background colored lights">
+							</picture>
+						</div>
+						<div class="join-now__videos">
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/01.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/01.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/01.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/02.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/02.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/02.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/03.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/03.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/03.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/04.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/04.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/04.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+									<source src="{% static 'main/files/05.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/05.mp4' %}" type="video/mp4">
+
+									<p>Your browser does not support the video tag, but you can <a href=“./files/05.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+							<div class="join-now__video video-card">
+								<video autoplay muted loop playsinline preload="auto">
+
+									<source src="{% static 'main/files/06.webm' %}" type="video/webm">
+									<source src="{% static 'main/files/06.mp4' %}" type="video/mp4">
+									<p>Your browser does not support the video tag, but you can <a href=“./files/06.mp4”>download it</a> and watch it with your favorite video player.</p>
+								</video>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+{% endblock %}
+
+{% block script %}	<script async src="{% static 'main/js/homepage.min.js' %}"></script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetElement = document.querySelector(this.getAttribute('href'));
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({
+                top: targetPosition - (headerHeight -20),
+                behavior: 'smooth'
+                });
+
+        });
+    });
+	</script>
+	<script>
+		function loader() {
+			const loader = document.querySelector(".loader");
+		
+			// Скрываем лоадер через 2 секунды
+			const hideLoader = setTimeout(function() {
+				loader.classList.add("_hide");
+			}, 100);
+		
+			window.addEventListener("load", function() {
+				// Убираем лоадер сразу, если загрузка завершилась раньше
+				loader.classList.add("_hide");
+				clearTimeout(hideLoader); // Очищаем таймер, если загрузка завершилась
+			});
+		}
+		
+		loader();
+	
+
+	</script>
+{% endblock %}

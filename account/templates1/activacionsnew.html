@@ -1,0 +1,55 @@
+{% extends 'new.html' %}{% load static %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'main/css/homepage-t.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/DashboardPage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/PricingPage.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+<div class="pricing-page">
+    <main>
+      <h1>Add Credits</h1>
+      <div class="pricing-container">
+        <div class="pricing-card">
+          <h2>50</h2>
+          <p>Credits</p>
+          <p>It's approximately 50 minutes of generated videos.</p>
+          <form method="POST" action="{% url 'create_payment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="amount" value="10">
+            <button type="submit">Bay</button>
+         </form>
+          <p class="price">$10</p>
+        </div>
+        <div class="pricing-card selected">
+          <h2>100</h2>
+          <p>Credits</p>
+          <p>It's approximately 100 minutes of generated videos.</p>
+          <form method="POST" action="{% url 'create_payment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="amount" value="20">
+            <button type="submit">Bay</button>
+         </form>
+          <p class="price">$20</p>
+        </div>
+        <div class="pricing-card red-border">
+          <h2>150</h2>
+          <p>Credits</p>
+          <p>It's approximately 150 minutes of generated videos.</p>
+          <form method="POST" action="{% url 'create_payment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="amount" value="30">
+            <button type="submit">Bay</button>
+         </form>
+          <p class="price">$30</p>
+        </div>
+      </div>
+      <div class="promo-container">
+        <label htmlFor="promo-input" class="promo-label">Promocode</label>
+        <div class="promo-input-container">
+          <input type="text" id="promo-input" placeholder="Enter promocode here" class="promo-input" />
+          <button class="promo-button">Apply</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  {% endblock %}

@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title>Frameworks by wizze.ai</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% block style %}{% endblock %}
+	<link rel="shortcut icon" href="{% static % 'main/favicon.ico'}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'main/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/favicon/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'main/favicon/favicon-16x16.png' %}">
+	<link rel="stylesheet" href="{% static 'main/css/Header.css' %}">
+	<link rel="mask-icon" href="{% static 'main/favicon/safari-pinned-tab.svg' %}" color="#1784a3">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="shortcut icon" href="{% static 'main/favicon.ico'  %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap&_v=20240710133249" rel="stylesheet">
+
+	<style>
+		.loader {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			background-color: #ffffff;
+			z-index: 1000;
+			transition: opacity 0.35s ease, visibility 0.35s ease;
+		}
+
+		.loader._hide {
+			opacity: 0;
+			visibility: hidden;
+		}
+				.btn-gray:hover{
+		background:#000;
+			color:#fff;
+
+		}
+		.btn-gray:hover img{
+		 filter: invert(1);
+		 	color:#fff;
+		}
+				._header-scroll .header-actions__btn.btn-gray:hover{
+		background:#000;
+		color:#fff;
+
+		}
+		._header-scroll .header-actions__btn.btn-gray:hover img{
+		 filter: invert(1);
+		 	color:#fff;
+		}
+		#dropdown-menu {
+			position: absolute;
+			background-color: white;
+			border: 1px solid #ccc;
+			z-index: 1000; /* Чтобы меню было над другими элементами */
+		}
+	@media(min-width:730px){	
+		.mobileyes{
+			display: none;
+		}
+		#dropdown-menu ul {
+			list-style-type: none;
+			/* margin: 0; */
+			margin-top: 2rem;
+			position: absolute;
+			/* bottom: 0; */
+			right: -95px;
+			display: block;
+			float: left;
+			background: #fff;
+			color: #fff;
+			border: 1px solid #ebebeb;
+			border-radius: 15px;
+			padding: 15px;
+			width: 135px;
+		}
+	}
+	@media(max-width:730px){
+		.page{
+			margin-top: 0px;padding-top: 0px;
+		}	
+		.mobileno{
+			display: none;
+		}
+
+		#dropdown-menu ul {
+			width: 135px;
+			list-style-type: none;
+			/* margin: 0; */
+			margin-top: 2rem;
+			position: absolute;
+			/* bottom: 0; */
+			right: 0;
+			display: block;
+			float: left;
+			background: #fff;
+			color: #fff;
+			border: 1px solid #ebebeb;
+			border-radius: 15px;
+			padding: 15px;
+		}
+	}
+		#dropdown-menu li {
+			padding: 8px 10px;
+		}
+		
+		#dropdown-menu li a {
+			text-decoration: none;
+			color: black;
+		}
+		.proflink:hover,.proflink:active,.proflink:focus{
+			filter: opacity(0.5);
+		}
+		img.ho {
+			-webkit-transition: all 1s ease;
+			transition: all 1s ease;
+		}
+		 img.ho:hover {
+			-webkit-transform: rotate(90deg); /* Градусы поворота можно изменить по необходимости */
+			transform: rotate(90deg); /* Градусы поворота можно изменить по необходимости */
+		}
+		img.ho_ {
+			-webkit-transition: all 1s ease;
+			transition: all 1s ease;
+			margin-right: 10px;
+		}
+
+		img.ho_:hover {
+			animation: rotateAnimation 1s forwards; /* Применяем анимацию при наведении на картинку */
+		}
+
+		@keyframes rotateAnimation {
+			0% {
+				transform: rotate(0deg); /* Начальное положение - без поворота */
+			}
+			25% {
+				transform: rotate(15deg); /* Поворот на 30 градусов вправо через 25% времени */
+			}
+			75% {
+				transform: rotate(-15deg); /* Поворот на 60 градусов влево через 75% времени */
+			}
+			100% {
+				transform: rotate(0deg); /* Возвращение на исходную позицию в конце анимации */
+			}
+		}
+		.plus-btn:hover{
+			background-color:#000 ;
+			color: #ffff;
+		}
+	</style>
+</head>
+<div class="wrapper">
+    <header class="header ">
+        <div data-lp class="header__wrapper">
+          <div class="header__container">
+            <a href="{% url 'home' %}" class="header__logo logo">
+              <img width="182" height="40" fetchpriority="high" loading="eager" decoding="async" src="{% static 'main/img/logo/logo.svg' %}" alt="logo Frameworks">
+            </a>
+            <div class="header__menu menu">
+              <nav class="menu__body">
+                <div class="middle-section mobileno">
+                    <span>{{ profile.tokens }} Credits</span>
+                    <a href= "{% url 'activacions' %}" to="/pricing" class="plus-btn">+</a>
+                </div>
+                <ul class="menu__list mobileyes">
+                  <li class="menu__item"><a href="#use_cases" class="menu__link">Use Cases</a></li>
+                  <li class="menu__item"><a href="#features" class="menu__link">Features</a></li>
+                  <li class="menu__item"><a href="#faq" class="menu__link">FAQ</a></li>
+                </ul>
+                <a href="#" class="menu__mobile-logo logo-powered-by">
+                  Powered by <img width="97" height="27" loading="lazy" decoding="async" src="{% static 'main/img/logo/wizze-ai.svg' %}" alt="Wizze.ai">
+                </a>
+              </nav>
+            </div>
+            <div class="header__actions header-actions">
+            {% if request.user.is_authenticated %}
+           
+             {% if user.profile.photo %}
+             <div class="right-section">
+              <a href="{% url 'dashboard' %}">
+                <img src="{% static 'main/img/public/home.JPG' %}" alt="Home" class="icon" />
+              </a>
+              {% if user.profile.photo %}
+              <img src="{{ user.profile.photo.url }}" alt="Profile Picture"  style="width:33px;height:33px;border-radius: 50%; margin-right: 5px;   object-fit: cover;">
+                {% else %}
+                <img src="{% static 'main/img/public/profile.JPG' %}" alt="Profile" class="profile-pic" />
+               {% endif %}
+              <span class="mobileno" style="margin-right: 10px;">	{{ request.user.first_name|default:request.user.username }}</span>
+              <a href="{% url 'edit' %}">
+                <img src="{% static 'main/img/public/settings.JPG' %} " alt="Settings" class="icon" />
+              </a>
+              </div>
+             {% else %}
+             <div class="right-section">
+              <a href="{% url 'dashboard' %}">
+                <img src="{% static 'main/img/public/home.JPG' %}" alt="Home"  width="37" class="ho_"/>
+              </a>
+              {% if user.profile.photo %}
+              <img src="{{ user.profile.photo.url }}" alt="Profile Picture"  style="width:33px;height:33px;border-radius: 50%;    object-fit: cover; " >
+                {% else %}
+                <img src="{% static 'main/img/public/profile.JPG' %}" alt="Profile" class="profile-pic" />
+               {% endif %}
+              <span class="mobileno" style="margin-right: 10px;">	{{ request.user.first_name|default:request.user.username }}</span>
+              <a href="{% url 'edit' %}">
+                <img src="{% static 'main/img/public/settings.JPG' %} " alt="Settings" class="icon ho" />
+              </a>
+              </div>
+               
+             {% endif %}
+             {% else %}
+                  <a href="{% url 'dashboard' %}" class="header-actions__btn btn-grays">Log in</a>
+              <a href="{% url 'register' %}" class="header-actions__btn btn-gray">Get Started</a>
+                {% endif %}
+            
+              <button aria-label="Menu burger" type="button" class="icon-menu"><span></span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+	  <div class="mobileyes middle-section" style="margin-top:3.2rem;    padding-left: 0rem;">
+		<span>{{ profile.tokens }} Credits</span>
+		<a href= "{% url 'activacions' %}" to="/pricing" class="plus-btn">+</a>
+	</div>
+<body>
+
+{% block content %}
+
+{% endblock %}
+{% block script %}{% endblock %}
+<script>
+    window.onload = function() {
+        document.getElementById('user-icon-button').addEventListener('click', function(event) {
+            event.stopPropagation(); // Остановить всплытие события, чтобы предотвратить закрытие при клике на кнопку
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            dropdownMenu.style.display = (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') ? 'block' : 'none';
+        });
+
+        // Закрытие меню при клике вне его
+        window.onclick = function(event) {
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            // Проверяем, был ли клик вне кнопки и меню
+            if (!event.target.matches('#user-icon-button') && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        };
+    };
+</script>
+</body>
+<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__top top-footer">
+					<a href="#" class="top-footer__logo logo">
+						<img width="182" height="40" loading="lazy" decoding="async" src="{% static 'main/img/logo/logo.svg' %}" alt="logo Frameworks">
+					</a>
+					<nav class="top-footer__menu">
+						<ul class="top-footer__menu-list">
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#use_cases" class="top-footer__link">Use Cases</a>
+							</li>
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#features" class="top-footer__link">Features</a>
+							</li>
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#faq" class="top-footer__link">FAQ</a>
+							</li>
+									<li class="top-footer__item top-footer__item--login">
+									{% if request.user.is_authenticated %}
+
+ 					{% else %}
+        				<a href="{% url 'login' %}" class="header-actions__btn">Log in</a>
+        			{% endif %}
+							</li>
+						</ul>
+					</nav>
+						{% if request.user.is_authenticated %}
+							{% else %}
+					<a href="{% url 'dashboard' %}" class="top-footer__btn btn-gray">Get Started</a>
+					{% endif %}
+				</div>
+				<div class="footer__bottom bottom-footer">
+					<div class="bottom-footer__text text-small">
+						Our website uses cookies necessary for the functioning of our website, cookies that optimize the performance. To learn more about our cookies, how we use them and their benefits, please read our Cookie Policy.
+					</div>
+					<div class="cont faq__section-point section-point" style="min-width: 156px;"><a href="mailto:b@gravitypro.me" style="display: flex;align-items: center;justify-content: space-between;"><span style="padding-right: .5rem;">Write to us </span><img width="25" height="25"  src="{% static 'main/img/icons/message.png' %}" alt="Write to us"></a></div>
+
+					<a href="{% url 'dashboard' %}" class="bottom-footer__logo-poweredby logo-powered-by">
+						Powered by <img width="97" height="27" loading="lazy" decoding="async" src="{% static 'main/img/logo/wizze-ai.svg' %}" alt="Wizze.ai">
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+
+
+</html>

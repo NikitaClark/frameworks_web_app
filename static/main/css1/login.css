@@ -1,0 +1,106 @@
+
+    @media (max-width: 600px) {
+        .social {
+            display: block;
+            text-align: center;
+        }
+    }
+    @media (min-width: 600px) {
+        .social {
+            display: flex;
+        }
+    }
+    
+    .social a {
+        margin: 1rem;
+        list-style: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: #fff;
+        border: 1px solid #ffffff;
+        text-align: center;
+        position: relative; /* Для корректного позиционирования ::after */
+    }
+    .social a li{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .social  a li img{
+        margin-right: .5rem;
+    }
+    .social a {
+        width: 220px;
+    text-align: center;
+
+       
+        text-decoration: none; /* Убираем подчеркивание ссылок */
+        display: inline-block; /* Делаем элемент блочным для корректного позиционирования */
+        position: relative; /* Для абсолютного позиционирования круга */
+    }
+    
+    /* Стиль для псевдоэлемента ::after */
+    .social li::after {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: green; /* Цвет круга */
+        border-radius: 50%; /* Делаем кругом */
+        position: absolute; /* Позиционируем относительно родителя */
+        left: calc(100% + 5px); /* Располагаем круг немного вправо от текста */
+        top: 50%; /* Центрируем по вертикали относительно родителя */
+        transform: translateY(-50%) scale(0); /* Центрируем и уменьшаем до нуля */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Плавный переход */
+    }
+    
+    .social li:hover::after {
+        opacity: 1; /* Показываем круг */
+        transform: translateY(-50%) scale(1); /* Увеличиваем до нормального размера и центрируем */
+    }
+    
+    .center {
+        display: block;
+        text-align: center;
+        color: #b5b5b5;
+        margin-top: 2rem;
+    }
+    
+    label {
+        /* color: #b5b5b5; */
+        color: black !important;
+        display: block;
+        text-align: center;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+    
+    input {
+        display: block;
+        margin: auto;
+        padding: .5rem;
+        border-radius: 10px;
+    }
+    
+    .link {
+        color: #49949d;
+    }
+    
+    .link:hover {
+        color: #2f8089;
+    }
+    
+    form ul {
+        text-align: center;
+
+        padding: 1rem;
+    }
+    
+    form span {
+        display: none;
+    }
+    .messages{
+        background: #59bf66;
+        color: #ffffff;
+        border-radius: 15px;
+        padding: 1rem;
+      }

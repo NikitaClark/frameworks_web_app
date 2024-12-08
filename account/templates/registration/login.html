@@ -1,0 +1,60 @@
+{% extends 'base.html' %}{% load static %}
+{% load widget_tweaks %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/homepage.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2 class="features__title title" style="line-height: 125%;">Log in to your account</h2>
+    {% if form.errors %}
+{% endif %}
+<div class="social">
+    <a href="{% url 'social:begin' 'google-oauth2' %}">
+    <li class="google">
+        <img width="18"    src="{% static 'main/img/icons/google.png' %}">
+        <span style="color: black;">Sign in with google</span>
+    </li>
+    </a>
+    <a href="{% url 'social:begin' 'vk-oauth2' %}">
+    <li class="Vkontakte">  
+            <img width="18"    src="{% static 'main/img/icons/vk.png' %}">
+            <span style="color: black;">Sign in with VK</span>
+    </li>
+    </a> 
+</div>
+<div class="login-form">
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+<!-- 
+        {% if form.non_field_errors %}
+            <div class="messages">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %} -->
+    <div>
+        <label for="{{ form.username.id_for_label }}">Username or Email</label>
+        {{ form.username|add_class:"login_form_input" }}<br>
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            {{ form.password|add_class:"login_form_input"  }}<br>
+    </div>  
+    {% if form.non_field_errors %}
+    <!-- <div class="errorlist"> -->
+        <ul class="errorlist" style="padding: 0;">
+            {% for error in form.non_field_errors %}
+                <li class="input_error" style="width: 300px;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        <!-- {{ form.non_field_errors }} -->
+    <!-- </div> -->
+    {% endif %}  
+    <input type="hidden" name="next" value="{{ next }}"/>
+        <p><input type="submit" value="Log in" class="powered-video__btn btn btn--black lkhov" style="display:block;"></p>
+</form>
+    <a href="{% url 'password_reset' %}" class="center link"> Forgotten your password?</a>
+    <a href="{% url 'register' %}" class="center link">Create an account</a>
+</div>
+
+
+
+{% endblock %}

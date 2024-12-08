@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Frameworks by wizze.ai</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'main/css/story.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/homepage.min.css' %}">
+	<link rel="shortcut icon" href="{% static 'main/favicon.ico' %}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'main/favicon/apple-touch-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/favicon/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'main/favicon/favicon-16x16.png' %}">
+	<link rel="mask-icon" href="{% static 'main/favicon/safari-pinned-tab.svg' %}" color="#1784a3">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="shortcut icon" href="{% static 'main/favicon.ico'  %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap&_v=20240710133249" rel="stylesheet">
+	<div class="loader"></div>
+</head>
+<div class="wrapper">
+		<header class="header">
+			<div data-lp class="header__wrapper">
+				<div class="header__container">
+					<a href="{% url 'home' %}" class="header__logo logo">
+						<img width="182" height="40" fetchpriority="high" loading="eager" decoding="async" src="{% static 'main/img/logo/logo.svg' %}" alt="logo Frameworks">
+					</a>
+					<div class="header__menu menu">
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li class="menu__item"><a href="{% url 'home' %}#use_cases" class="menu__link">Use Cases</a></li>
+								<li class="menu__item"><a href="{% url 'home' %}#features" class="menu__link">Features</a></li>
+								<li class="menu__item"><a href="{% url 'home' %}#faq" class="menu__link">FAQ</a></li>
+							</ul>
+							<a href="#" class="menu__mobile-logo logo-powered-by">
+								Powered by <img width="97" height="27" loading="lazy" decoding="async" src="{% static 'main/img/logo/wizze-ai.svg' %}" alt="Wizze.ai">
+							</a>
+						</nav>
+					</div>
+					<div class="header__actions header-actions">
+					{% if request.user.is_authenticated %}
+ 					{{ request.user.first_name|default:request.user.username }}
+					 {% if user.profile.photo %}
+					 <button id="user-icon-button">	
+					 <img src="{{ user.profile.photo.url }}" alt="Profile Picture" width="24" style="width: 32px;
+						 height: 32px;
+						 object-fit: cover;
+						 filter: saturate(0.7);
+						 border-radius: 50%;
+						 border: 1.7px solid #797979;">
+					 </button>
+					 <div id="dropdown-menu" style="display: none;">
+						 <ul>
+							 <li><a href="{% url 'dashboard' %}">Profile</a></li>
+							 <li><a href="{% url 'edit' %}">Edit profile</a></li>
+							 <li><form  action="{% url 'logout' %}" method="post" style="display: inline; ">
+								{% csrf_token %}
+								<input type="submit" value="Logout"  style="   background: none; cursor: pointer;padding: 8px 10px;">
+							 </form>
+							</li>
+						 </ul>
+					 </div>
+					 {% else %}
+					 <button id="user-icon-button">
+						 <img src="{% static 'main/img/icons/user.png' %}" alt="Default User Icon" width="24" class="proflink">
+					 </button>
+					 
+					 <div id="dropdown-menu" style="display: none;">
+						 <ul>
+							 <li><a href="{% url 'dashboard' %}">Profile</a></li>
+							 <li><a href="{% url 'edit' %}">Edit profile</a></li>
+							 <li><form  action="{% url 'logout' %}" method="post" style="display: inline; ">
+								{% csrf_token %}
+								<input type="submit" value="Logout"  style="   background: none; cursor: pointer;">
+							 </form>
+							</li>
+						 </ul>
+					 </div>
+						 
+					 {% endif %}
+ 					{% else %}
+					 <a href="{% url 'dashboard' %}" class="header-actions__btn">Log in</a>
+					 <a href="{% url 'register' %}" class="header-actions__btn btn-gray">Get Started</a>
+        			{% endif %}
+						<button aria-label="Menu burger" type="button" class="icon-menu"><span></span></button>
+					</div>
+				</div>
+			</div>
+		</header>
+<body>
+    <div id="content">
+				<main class="page">
+					<div class="panel" style="position: static;">
+					<span class="user">
+       					{% if request.user.is_authenticated %}
+       					Hello {{ request.user.first_name|default:request.user.username }},
+						   {% if request.path == '/account/' %}
+						   <div class="dropdown" >
+							<button onclick="myFunction()" class="dropbtn ex">Story +</button>
+							<div id="myDropdown" class="dropdown-content">
+								<ul>
+								{% for video in video_links|dictsortreversed:"uploaded_at"|slice:":5" %}					
+									<li><a href="{{ video.link }}">{{ video.filename }}</a></li>
+								{% empty %}
+							</ul>
+							<span>You don't have any processed videos</span>
+								{% endfor %}
+								<hr>
+								<span style="padding:0px;"><a href="{% url 'story' %}">View full history</a></span>
+							</div>
+						</div>
+						   {% else %}
+						   <a href="{% url 'dashboard' %}"> <button class="dropbtn2 ex">Profile</button></a>
+
+					   {% endif %}
+
+							<form  class="ex" action="{% url 'logout' %}" method="post" style="display: inline;">
+            					{% csrf_token %}
+            					<input type="submit" value="Logout" >
+        					 </form>
+           					 {% else %}
+
+						{% endif %}
+    				</span>
+					</div>
+            		<section class="page__features features" style="padding-top: 30px;">
+                		<div class="features__container" style="position: relative;z-index: 1;opacity: .8;padding-top: 30px;max-width: 920px;margin: auto;">
+
+							{% if request.user.is_authenticated %}
+							<div>
+								<ul>
+									{% for video in page_obj.object_list %}
+										<li><span class="link_title">{{ video.filename }}</span><a class="link_downl" href="{{ video.link }}">download</a></li>
+									{% empty %}
+										<li>No videos available.</li>
+									{% endfor %}
+								</ul>
+							
+								<div class="pagination">
+									<span class="step-links">
+										{% if page_obj.has_previous %}
+											<a href="?page=1">&laquo; First</a>
+											<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+										{% endif %}
+							
+										
+							
+										{% if page_obj.has_next %}
+											<a href="?page={{ page_obj.next_page_number }}">Next</a>
+											<a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+										{% endif %}
+										<span class="current">
+											{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+										</span>
+									</span>
+								</div>
+							</div>
+							{% endif %}
+
+                    	</div>
+            		</section>
+            	</main>
+			</div>
+	</div>
+
+
+{% block script %}	<script async src="{% static 'main/js/homepage.js' %}"></script>
+<script>
+    window.onload = function() {
+        document.getElementById('user-icon-button').addEventListener('click', function(event) {
+            event.stopPropagation(); // Остановить всплытие события, чтобы предотвратить закрытие при клике на кнопку
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            dropdownMenu.style.display = (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') ? 'block' : 'none';
+        });
+
+        // Закрытие меню при клике вне его
+        window.onclick = function(event) {
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            // Проверяем, был ли клик вне кнопки и меню
+            if (!event.target.matches('#user-icon-button') && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        };
+    };
+</script>
+<script>
+	function myFunction() {
+		const dropdown = document.getElementById("myDropdown");
+		const button = document.querySelector(".dropbtn");
+	
+		dropdown.classList.toggle("show");
+	
+		// Изменяем текст кнопки в зависимости от состояния выпадающего списка
+		if (dropdown.classList.contains("show")) {
+			button.textContent = "Story -"; // Текст при открытом списке
+		} else {
+			button.textContent = "Story +"; // Текст при закрытом списке
+		}
+	}
+	
+	// Close the dropdown menu if the user clicks outside of it
+	window.onclick = function(event) {
+	  if (!event.target.matches('.dropbtn')) {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+		  var openDropdown = dropdowns[i];
+		  if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+	
+			// Восстанавливаем текст кнопки при закрытии выпадающего списка
+			document.querySelector(".dropbtn").textContent = "Story +";
+		  }
+		}
+	  }
+	}
+	</script>
+{% endblock %}
+</body>
+<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__top top-footer">
+					<a href="#" class="top-footer__logo logo">
+						<img width="182" height="40" loading="lazy" decoding="async" src="{% static 'main/img/logo/logo.svg' %}" alt="logo Frameworks">
+					</a>
+					<nav class="top-footer__menu">
+						<ul class="top-footer__menu-list">
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#use_cases" class="top-footer__link">Use Cases</a>
+							</li>
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#features" class="top-footer__link">Features</a>
+							</li>
+							<li class="top-footer__item">
+								<a href="{% url 'home' %}#faq" class="top-footer__link">FAQ</a>
+							</li>
+									<li class="top-footer__item top-footer__item--login">
+									{% if request.user.is_authenticated %}
+ 					
+ 						<a href="{% url 'dashboard' %}" class="header-actions__btn btn-gray "><img src="{% static 'main/img/icons/user.png' %} " width="24"></a>
+ 					{% else %}
+        				<a href="{% url 'login' %}" class="header-actions__btn">Log in</a>
+        			{% endif %}
+							</li>
+						</ul>
+					</nav>
+						{% if request.user.is_authenticated %}
+							{% else %}
+					<a href="{% url 'dashboard' %}" class="top-footer__btn btn-gray">Get Started</a>
+					{% endif %}</div>
+				<div class="footer__bottom bottom-footer">
+					<div class="bottom-footer__text text-small">
+						Our website uses cookies necessary for the functioning of our website, cookies that optimize the performance. To learn more about our cookies, how we use them and their benefits, please read our Cookie Policy.
+					</div>
+					<a href="#" class="bottom-footer__logo-poweredby logo-powered-by">
+						Powered by <img width="97" height="27" loading="lazy" decoding="async" src="{% static 'main/img/logo/wizze-ai.svg' %}" alt="Wizze.ai">
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+</html>
